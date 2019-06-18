@@ -38,15 +38,31 @@ AddressBook.prototype.deleteContact = function(id) {
 }
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber,addressHome, emailHome, addressWork, emailWork) {
+function Contact(firstName, lastName, phoneNumber, emailHome, addressHome, emailWork, addressWork) {
   this.firstName = firstName,
   this.lastName = lastName,
   this.phoneNumber = phoneNumber,
+  this.emailHome = emailHome,
   this.addressHome = addressHome,
-  this.emailHome = emailHome
-  this.addressWork = addressWork,
-  this.emailWork = emailWork
+  this.emailWork = emailWork,
+  this.addressWork = addressWork
+  // function hideEmpty() {
+  //   if (this.addressHome == null) {
+  //     $("#address-home").hide;
+  //     // this.addressHome.remove();
+  //   }
+  // }
 }
+
+// Contact.prototype.noneEmpty = function() {
+//   function clean(noneEmpty) {
+      // for(var i = 0; i = 1; i++) {
+      //   if (addressHome === null || addressHome === undefined) {
+      //     delete addressHome;
+        // }
+//   }
+// }
+// }
 
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
@@ -76,12 +92,19 @@ function showContact(contactId) {
   $(".address-work").html(contact.addressWork);
   var buttons = $("#buttons");
   buttons.empty();
-  buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
+  buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
+  // buttons.append(`<button class='deleteButton' id='${contact.id}'>Delete</button>`);
+  if (contact.addressHome) {
+    $("#paddresshome").show();
+  } else {
+    $("#paddresshome").hide();
+  }
 }
 
 function attachContactListeners() {
   $("ul#contacts").on("click", "li", function() {
     showContact(this.id);
+
   });
   $("#buttons").on("click", ".deleteButton", function() {
     addressBook.deleteContact(this.id);
@@ -111,5 +134,9 @@ $(document).ready(function() {
     $("input#new-workaddress").val("");
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
+
+    if ($("#form-group").val == "") {
+      $("form-group").remove();
+    }
   })
 })
