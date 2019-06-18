@@ -94,11 +94,37 @@ function showContact(contactId) {
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
   // buttons.append(`<button class='deleteButton' id='${contact.id}'>Delete</button>`);
-  if (contact.addressHome) {
-    $("#paddresshome").show();
+  if (contact.lastName) {
+    $("#plast").show();
   } else {
-    $("#paddresshome").hide();
+    $("#plast").hide();
   }
+  if (contact.phoneNumber) {
+    $("#pphone").show();
+  } else {
+    $("#pphone").hide();
+  }
+  if (contact.emailHome) {
+    $("#pemail-home").show();
+  } else {
+    $("#pemail-home").hide();
+  }
+  if (contact.addressHome) {
+    $("#paddress-home").show();
+  } else {
+    $("#paddress-home").hide();
+  }
+  if (contact.emailWork) {
+    $("#pemail-work").show();
+  } else {
+    $("#pemail-work").hide();
+  }
+  if (contact.addresswork) {
+    $("#paddress-work").show();
+  } else {
+    $("#paddress-work").hide();
+  }
+
 }
 
 function attachContactListeners() {
